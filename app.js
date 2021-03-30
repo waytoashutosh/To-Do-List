@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const date = require(__dirname+"/date.js");
 
 const app = express();
 port = 3000;
@@ -12,18 +13,12 @@ app.listen(port,function(){
 
 let item=[];
 
-let options = { weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' };
-let today  = new Date();
 
-let day = today.toLocaleDateString("en-US", options);
 app.set('view engine', 'ejs');
 
 app.get('/', function(req, res){
 
-    res.render("list",{whichday:day, itemList:item, PageName:"Home"});
+    res.render("list",{whichday:date.getDate(), itemList:item, PageName:"Home"});
 
 
 })
@@ -47,7 +42,7 @@ app.post('/', function(req, res){
 
 let workitems=[];
 app.get('/work', function(req,res){
-    res.render("list",{whichday:day, itemList:workitems, PageName:"Work"});
+    res.render("list",{whichday:date.getDate(), itemList:workitems, PageName:"Work"});
 })
 
 
