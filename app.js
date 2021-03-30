@@ -23,17 +23,35 @@ app.set('view engine', 'ejs');
 
 app.get('/', function(req, res){
 
-    res.render("list",{whichday:day, itemList:item});
+    res.render("list",{whichday:day, itemList:item, PageName:"Home"});
 
 
 })
 
 app.post('/', function(req, res){
-    item.push(req.body.nextThing);
-    console.log(item);
-    res.redirect("/");
+
+    if(req.body.button == "Home"){
+        item.push(req.body.nextThing);
+        console.log("Home");
+        console.log(item);
+        res.redirect("/");
+    }
+    else if(req.body.button == "Work"){
+        workitems.push(req.body.nextThing);
+        console.log("Work");
+        console.log(workitems);
+        res.redirect("/work");
+    }
+    
 })
+
+let workitems=[];
+app.get('/work', function(req,res){
+    res.render("list",{whichday:day, itemList:workitems, PageName:"Work"});
+})
+
 
 app.get('/about',function(req,res){
     res.render("about");
 })
+
