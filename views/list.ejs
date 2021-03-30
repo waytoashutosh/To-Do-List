@@ -9,7 +9,8 @@
 </head>
 <body>
     <div clas="box" id="heading">
-        <h1><%= whichday %></h1>
+        <h1><%= PageName %></h1>
+        <h2><%= whichday %></h2>
     </div>
     
     <div class="box">
@@ -22,7 +23,7 @@
 
         <form class="item" action="/" method="POST">
             <input type="text" name="nextThing" placeholder="New Goal" autocomplete="off">
-            <button type="submit" name="button">+</button>
+            <button type="submit" name="button" value=<%= PageName %>>+</button>
         </form>
     </div>
    
