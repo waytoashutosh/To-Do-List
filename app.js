@@ -5,7 +5,7 @@ const app = express();
 port = 3000;
 
 app.use(bodyParser.urlencoded({extended:true}));
-
+app.use(express.static("public"));
 app.listen(port,function(){
     console.log("To do list server is running.");
 })
