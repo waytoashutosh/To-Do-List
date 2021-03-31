@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const date = require(__dirname+"/date.js");
+const mongoose = require("mongoose");
 
 const app = express();
 port = 3000;
@@ -11,14 +12,31 @@ app.listen(port,function(){
     console.log("To do list server is running.");
 })
 
-let item=[];
+// let item=[];
+
+mongoose.connect("mongodb://localhost:27017/toDoListDB",{useNewUrlParser:true});
+
+const db = mongoose.connection;
+
+const itemSchema = new mongoose.Schema({
+    name: String
+});
+const Item = mongoose.model('Item', itemSchema);
+
+
+let defaultItems =[];
+let workItems=[];
+
 
 
 app.set('view engine', 'ejs');
-
 app.get('/', function(req, res){
 
-    res.render("list",{whichday:date.getDate(), itemList:item, PageName:"Home"});
+    Item.find({}, function(err, foundItems){
+
+        res.render("list",{whichday:date.getDate(), itemList:foundItems, PageName:"Home"});
+    })
+   
 
 
 })
@@ -26,15 +44,37 @@ app.get('/', function(req, res){
 app.post('/', function(req, res){
 
     if(req.body.button == "Home"){
-        item.push(req.body.nextThing);
-        console.log("Home");
-        console.log(item);
+        let itemx = new Item({name:req.body.nextThing});
+     
+        itemx.save(function(err,item){
+        if(err){
+            console.log(err);
+
+        }
+        else{
+
+            console.log("Successful insertion of "+item.name);
+        }
+
+        });
+
         res.redirect("/");
     }
     else if(req.body.button == "Work"){
-        workitems.push(req.body.nextThing);
-        console.log("Work");
-        console.log(workitems);
+        let itemx = new Item({name:req.body.nextThing});
+        workItems.push(itemx);
+        Item.insert(workItems, function(err){
+        if(err){
+            console.log(err);
+
+        }
+        else{
+            console.log("Successful insertion of new item");
+        }
+
+        });
+
+
         res.redirect("/work");
     }
     
