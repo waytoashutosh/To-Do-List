@@ -3,15 +3,16 @@ html {
   background-image: -webkit-linear-gradient(65deg, #A683E3 50%, #E4E9FD 50%);
   min-height: 1000px;
   font-family: 'helvetica';
+  
 }
 
 h1 {
   color: #fff;
-  padding: 10px;
+  padding-top: 10px;
 }
 h2 {
   color: #fff;
-  padding: 10px;
+  padding-bottom: 10px;
 }
 
 .box {
@@ -20,11 +21,16 @@ h2 {
   background: white;
   border-radius: 5px;
   box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+  text-align: center;
 }
 
 #heading {
   background-color: #A683E3;
   text-align: center;
+  margin:auto;
+  max-width: 350px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
 }
 
 .item {
