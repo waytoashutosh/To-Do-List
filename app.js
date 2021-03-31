@@ -89,4 +89,15 @@ app.get('/work', function(req,res){
 app.get('/about',function(req,res){
     res.render("about");
 })
+app.post('/delete',function(req, res){
+    console.log(req.body);
+    Item.deleteOne({name:req.body.checkbox}, function(err,result){
+        if (err) {
+            console.log(err);
+          } else {
+            console.log(result);
+          }
+    });
+    res.redirect("/");
+})
 
